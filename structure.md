@@ -7,3 +7,68 @@ Modellizzare la struttura di una tabella per memorizzare tutti i dati riguardant
 - ogni **Studente** è iscritto ad un solo Corso di Laurea;
 - ogni Studente può iscriversi a più appelli di Esame;
 - per ogni appello d'Esame a cui lo Studente ha partecipato, è necessario memorizzare il **voto** ottenuto, anche se non sufficiente.
+
+DEPARTMENTS:
+- id | BIGINT | AI NOTNULL UNIQUE 
+- name
+- rector
+
+
+DEGREE COURSES:
+- id | BIGINT | AI NOTNULL UNIQUE
+- departments_id
+- name 
+- students_number
+- teachers_number
+- classes
+- exams_number
+
+
+COURSES:
+- id | BIGINT | AI NOTNULL UNIQUE
+- degree_courses_id
+- name
+- credits
+- teachers
+- classes
+- lesson_hours
+- students_number
+
+
+STUDENTS:
+- id | BIGINT | AI NOTNULL UNIQUE
+- degree_courses_id
+- name
+- lastname
+- freshman_number |
+- cfu_numbers
+
+
+TEACHERS:
+- id | BIGINT | AI NOTNULL UNIQUE
+- name
+- lastname
+- age
+- email
+- courses_name
+- courses_id
+
+
+EXAMS:
+- id | BIGINT | AI NOTNULL UNIQUE
+- number_of_appeals
+- teachers_id
+- students_id
+- courses_id
+- date
+- vote
+
+
+
+RELATIONSHIP:
+- oneToMany => degree_courses & departments
+- oneToMany => degree_courses & courses         
+- manyToMany => courses & teachers (+ pivot table)
+- oneToMany => courses & exams
+- oneToMany => students & exams
+- oneToMany => teachers & exams
