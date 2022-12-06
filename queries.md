@@ -42,19 +42,19 @@ SELECT COUNT(id) as teachers_without_phone_number FROM teachers WHERE phone is N
 # Group by:
 * Contare quanti iscritti ci sono stati ogni anno
 ```sql
-
+SELECT COUNT(id) as `enrolled`, year(`enrolment_date`) FROM `students` GROUP BY year(`enrolment_date`);
 ```
 * Contare gli insegnanti che hanno l'ufficio nello stesso edificio
 ```sql
-
+ SELECT COUNT(`teachers`.`id`) AS `teachers_with_same_address` FROM `teachers` GROUP BY `teachers`.`office_address`;
 ```
 * Calcolare la media dei voti di ogni appello d'esame
 ```sql
-
+SELECT AVG(`exam_student`.vote) AS `average_vote`, `exam_id` FROM exam_student GROUP BY exam_id
 ```
 * Contare quanti corsi di laurea ci sono per ogni dipartimento
 ```sql
-
+SELECT `department_id` AS `departments_number`, COUNT(id) AS 'numero corsi' FROM `degrees` GROUP BY `department_id`;
 ```
 # Join:
 * Selezionare tutti gli studenti iscritti al Corso di Laurea in Economia
